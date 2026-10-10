@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+
+    <link rel="stylesheet" href="ecom.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="div1">
+
+    <h2 class="h2">Ecommerce</h2>
+    <br>
+
+    <div class="q">
+        <a href="dashboard.html" class="a">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="Products.html" class="a">
+            Products
+        </a>
+    </div>
+
+    <br>
+
+    <div class="q">
+    <a href="Categories.html" class="a">
+        Categories
+    </a>
+</div>
+
+<br>
+
+    <div class="q">
+        <a href="Users.html" class="a">
+            Users
+        </a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="logout.html" class="a">
+            Logout
+        </a>
+    </div>
+
+</div>
+
+<div style="flex:1;">
+
+<form class="f1">
+
+    <h1 id="title">
+        Add User
+    </h1>
+
+    <br>
+
+    <label>Name :</label>
+
+    <input
+    type="text"
+    id="name">
+
+    <br><br>
+
+    <label>Email :</label>
+
+    <input
+    type="email"
+    id="email">
+
+    <br><br>
+
+    <label>Mobile :</label>
+
+    <input
+    type="text"
+    id="mobile">
+
+    <br><br>
+
+    <button
+    type="button"
+    onclick="saveUser()">
+
+        Save User
+
+    </button>
+
+</form>
+
+</div>
+
+<script>
+
+let users =
+JSON.parse(localStorage.getItem("users")) || [];
+
+let editIndex =
+localStorage.getItem("userEditIndex");
+
+if(editIndex !== null){
+
+    document.getElementById("title").innerText =
+    "Edit User";
+
+    document.getElementById("name").value =
+    users[editIndex].name;
+
+    document.getElementById("email").value =
+    users[editIndex].email;
+
+    document.getElementById("mobile").value =
+    users[editIndex].mobile;
+}
+
+function saveUser(){
+
+    let name =
+    document.getElementById("name").value.trim();
+
+    let email =
+    document.getElementById("email").value.trim();
+
+    let mobile =
+    document.getElementById("mobile").value.trim();
+
+    if(
+        name === "" ||
+        email === "" ||
+        mobile === ""
+    ){
+
+        alert("Fill all fields");
+
+        return;
+    }
+
+    let user = {
+
+        name:name,
+
+        email:email,
+
+        mobile:mobile
+    };
+
+    if(editIndex !== null){
+
+        users[editIndex] = user;
+
+        localStorage.removeItem(
+            "userEditIndex"
+        );
+
+        alert("User Updated Successfully");
+    }
+
+    else{
+
+        users.push(user);
+
+        alert("User Added Successfully");
+    }
+
+    localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+    );
+
+    location.href =
+    "Users.html";
+}
+
+</script>
+
+</body>
+</html>

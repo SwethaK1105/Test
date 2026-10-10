@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Category</title>
+
+<link rel="stylesheet" href="ecom.css">
+</head>
+
+<body>
+
+<div class="div1">
+
+    <h2 class="h2">Ecommerce</h2>
+    <br>
+
+    <div class="q">
+        <a href="dashboard.html" class="a">Dashboard</a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="Products.html" class="a">Products</a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="Categories.html" class="a">Categories</a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="Users.html" class="a">Users</a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="#" class="a" onclick="logout()">Logout</a>
+    </div>
+
+</div>
+
+<div style="flex:1;">
+
+<form class="f1">
+
+    <h1 id="title">
+        Add Category
+    </h1>
+
+    <br>
+
+    <label>Category Name :</label>
+
+    <input
+    type="text"
+    id="categoryName">
+
+    <br><br>
+
+<button
+type="button"
+onclick="alert('Button Clicked')">
+
+    Save Category
+
+</button>
+
+</form>
+
+</div>
+
+<script>
+
+let categories =
+JSON.parse(localStorage.getItem("categories")) || [];
+
+let editIndex =
+localStorage.getItem("categoryEditIndex");
+
+if(editIndex !== null){
+
+    document.getElementById("title").innerText =
+    "Edit Category";
+
+    document.getElementById("categoryName").value =
+    categories[editIndex].name;
+}
+
+function saveCategory(){
+
+    let name = document.getElementById("categoryName").value;
+
+    alert("Category Name = " + name);
+
+    let categories =
+    JSON.parse(localStorage.getItem("categories")) || [];
+
+    categories.push({
+        name:name
+    });
+
+    localStorage.setItem(
+        "categories",
+        JSON.stringify(categories)
+    );
+
+    alert("Saved");
+
+    window.location.href = "Categories.html";
+}
+
+function logout(){
+
+    localStorage.removeItem("editIndex");
+    localStorage.removeItem("userEditIndex");
+    localStorage.removeItem("categoryEditIndex");
+
+window.location.href = "Categories.html";
+}
+
+</script>
+
+</body>
+</html>

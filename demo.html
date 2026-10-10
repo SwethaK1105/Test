@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JS Demo</title>
+    </head>
+    <body id="q">
+        <link rel="stylesheet" href="abcd.css">
+        <h1 id="s">Good Morning!</h1>
+        <script>
+            var k=document.getElementById("s")
+            k.innerHTML="Happy Morning Kanmani!!!"
+            k.style.backgroundColor="pink"
+            k.style.color="blue"
+
+            var a=document.getElementById("q")
+            a.style.backgroundColor="skyblue"
+
+            var b=document.createElement("h2")
+            b.innerHTML="Did you Wake up?"
+            document.body.appendChild(b)
+
+            var l=document.createElement("ol")
+            var list=document.createElement("li")
+            list.innerText="Have you had your breakfast?"
+            l.append(list);
+            document.body.appendChild(l);
+
+            var list2=document.createElement("li")
+            list2.innerText="Are you ready to go for work?"
+            l.append(list2)
+
+            var tab=document.createElement("table")
+            var row=document.createElement("tr")
+            var row2=document.createElement("tr")
+            var row3=document.createElement("tr")
+            var head=document.createElement("th")
+            var head2=document.createElement("th")
+            var head3=document.createElement("th")
+            var data=document.createElement("td")
+            var data2=document.createElement("td")
+            var data3=document.createElement("td")
+            var data4=document.createElement("td")
+            var data5=document.createElement("td")
+            var data6=document.createElement("td")
+            head.innerText="Name"
+            head2.innerText="Age"
+            head3.innerText="Gender"
+            row.append(head)
+            row.append(head2)
+            row.append(head3)
+            tab.append(row)
+            document.body.appendChild(tab)
+            data.innerText="Swetha"
+            data2.innerText="20"
+            data3.innerText="Female"
+            row2.append(data)
+            row2.append(data2)
+            row2.append(data3)
+            tab.append(row2)
+            data4.innerText="Brindha"
+            data5.innerText="25"
+            data6.innerText="Female"
+            row3.append(data4)
+            row3.append(data5)
+            row3.append(data6)
+            tab.append(row3)
+            tab.border=1
+            tab.style.borderCollapse="collapse"
+             
+            
+            function doc(){
+                var p=document.getElementById("y")
+                p.innerHTML="Box1"
+                p.style.backgroundColor = "#A5CF83"
+            }
+           function doc1(){
+                var r=document.getElementById("f")
+                r.innerHTML="Box2"
+                r.style.backgroundColor = "#E03F4F" 
+            }
+            function doc2(){
+                var u=document.getElementById("g")
+                u.innerHTML="Box3"
+                u.style.backgroundColor = "#D6FB61"
+            }
+            function doc3(){
+                var x=document.getElementById("h")
+                x.innerHTML="Box4"
+                x.style.backgroundColor = "#0D0B61"
+            }
+            document.getElementById("as").addEventListener("click",()=>{
+                alert("Hi");
+            });
+            
+
+            
+            
+
+        </script>
+        <div style="display: flex;">
+        <div>
+        <div id="y" class="m"></div>
+        <button onclick="doc()">Click me</button>
+        </div>
+        <div>
+        <div id="f" class="m"></div>
+        <button onclick="doc1()">Click me</button>
+        </div>
+        <div>
+        <div id="g" class="m"></div>
+        <button onclick="doc2()">Click me</button>
+        </div>
+        <div>
+        <div id="h" class="m"></div>
+        <button onclick="doc3()">Click me</button>
+        </div>
+        </div>  
+        </div>
+
+
+        
+        
+        
+        
+        
+            
+        
+
+    </body>
+</html>

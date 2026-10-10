@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logout</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f3f4f7;
+    font-family:Arial,sans-serif;
+}
+
+.box{
+    background:white;
+    padding:40px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+button{
+    background:#2F7CF5;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>You have been logged out</h1>
+
+    <button onclick="goLogin()">
+        Login Again
+    </button>
+
+</div>
+
+<script>
+
+function goLogin(){
+
+    localStorage.removeItem("editIndex");
+    localStorage.removeItem("userEditIndex");
+    localStorage.removeItem("categoryEditIndex");
+
+    window.location.href = "login.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Literals</title>
+    </head>
+    <body>
+        <h1 id="s1"></h1>
+        <h2 id="s2"></h2>
+        <h3 id="s3"></h3>
+        <div id="s"></div>
+        <script>
+            var name="Swetha";
+            var age=20;
+            var city="Rajapalayam";
+            // document.getElementById("s1").innerHTML="Welcome "+name;
+            // document.getElementById("s2").innerHTML=age;
+            // document.getElementById("s3").innerHTML=city;
+            console.log(`Welcome ${name}`)
+            console.log(`${age}`)
+            console.log(`${city}`) 
+            
+            
+            var q=`
+              <div>
+                <h1>${name}</h1>
+                <h2>${age}</h2>
+                <h3>${city}</h3>
+                </div>    
+            `;
+            var d1=document.getElementById("s");
+            d1.innerHTML=q;
+        </script>
+    </body>
+</html>

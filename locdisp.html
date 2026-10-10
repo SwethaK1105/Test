@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Table Display</title>
+</head>
+<body>   
+<form style="text-align: center;">
+    <h1>Registration Form</h1>
+    <label>Name:</label>
+    <input type="text" id="s1"><br><br>
+
+    <label>Age:</label>
+    <input type="text" id="s2"><br><br>
+    
+    <label>City:</label>
+    <input type="text" id="s3"><br><br>
+
+    <label>Password:</label>
+    <input type="text" id="s4"><br><br> 
+
+    <label>E-mail:</label>
+    <input type="email" id="s5"><br><br>
+
+    <label>Contact:</label>
+    <input type="text" id="s6"><br><br>
+     <button type="button" onclick="reg()">Sign Up</button>
+</form>
+
+ <table border="2" id="myTable" style="border-collapse:collapse;">
+    <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
+            <th>Password</th>
+            <th>E-mail</th>
+            <th>Contact</th>
+        </tr>
+    </thead>
+    <tbody id="q1"></tbody>
+       
+    </table>
+
+
+    
+
+
+<script>
+     var arr=JSON.parse(localStorage.getItem("Data"))||[ ];
+     var  tbody = document.getElementById("q1");
+
+
+         function reg(){
+        var name=document.getElementById("s1").value;
+        var age=document.getElementById("s2").value;
+        var city=document.getElementById("s3").value;
+        var password=document.getElementById("s4").value;
+        var email=document.getElementById("s5").value;
+        var contact=document.getElementById("s6").value;
+
+       
+
+            var users={
+                Name:name,
+                Age:age,
+                City:city,
+                Password:password,
+                Email:email,
+                Contact:contact,
+            };
+            arr.push(users);
+            localStorage.setItem("Data",JSON.stringify(arr));
+            var data1=JSON.parse(localStorage.getItem("Data"));
+    
+            console.log(data1);
+          
+
+    
+
+       arr.map((a) => {
+        tbody.innerHTML += `
+        <tr>
+            <td>${a.Name}</td>
+            <td>${a.Age}</td>
+            <td>${a.City}</td>
+            <td>${a.Password}</td>
+            <td>${a.Email}</td>
+            <td>${a.Contact}</td>
+        </tr>
+        `;
+    });
+}
+
+
+        
+
+        
+    
+
+</script>
+</body>
+</html>

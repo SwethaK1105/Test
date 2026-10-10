@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sunstra Natural</title>
+  <style>
+
+    /* BASIC RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* TOP BAR */
+    .topbar {
+      background: #f5f0ea;
+      padding: 6px 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #666;
+      border-bottom: 1px solid #ddd;
+    }
+
+    /* HEADER */
+    .header {
+      background: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+    .header img {
+      height: 60px;
+    }
+    .header-icons {
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      background: #c67c4e;
+      padding: 0 20px;
+      display: flex;
+      gap: 5px;
+    }
+    .navbar a {
+      color: white;
+      padding: 12px 16px;
+      display: block;
+      font-size: 14px;
+    }
+    .navbar a:hover {
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* SOCIAL MEDIA SIDEBAR - RIGHT SIDE */
+    .social-bar {
+      position: fixed;
+      right: 0;
+      top: 40%;
+      display: flex;
+      flex-direction: column;
+      z-index: 999;
+    }
+    .social-bar a {
+      display: block;
+      padding: 10px 12px;
+      color: white;
+      font-size: 13px;
+      font-weight: bold;
+    }
+    .social-bar a:hover {
+      opacity: 0.8;
+    }
+    .yt  { background: red; }
+    .fb  { background: #1877f2; }
+    .ig  { background: #e1306c; }
+    .tw  { background: #1da1f2; }
+    .li  { background: #0077b5; }
+
+    /* COLOR CHANGER - LEFT SIDE */
+    .color-bar {
+      position: fixed;
+      left: 0;
+      top: 40%;
+      z-index: 999;
+    }
+    .color-bar button {
+      display: block;
+      writing-mode: vertical-rl;
+      background: #c67c4e;
+      color: white;
+      border: none;
+      padding: 14px 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .color-options {
+      display: none;
+      background: white;
+      padding: 10px;
+      border: 1px solid #ddd;
+      position: absolute;
+      left: 100%;
+      top: 0;
+    }
+    .color-options.show {
+      display: block;
+    }
+    .color-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin: 5px 0;
+      cursor: pointer;
+      border: 2px solid #ccc;
+    }
+
+    /* SLIDER */
+    .slider {
+      position: relative;
+      overflow: hidden;
+    }
+    .slide {
+      display: none;
+    }
+    .slide.active {
+      display: block;
+    }
+    .slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+    .slider-btns {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+    .slider-btns button {
+      background: rgba(0,0,0,0.4);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* CATEGORY SECTION */
+    .categories {
+      padding: 40px 20px;
+      background: #fdf8f4;
+    }
+    .categories h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+    .cat-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .cat-box {
+      width: 30%;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-box img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+    .cat-box .cat-label {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .cat-box .cat-label h3 {
+      margin-bottom: 8px;
+    }
+    .cat-box .cat-label a {
+      background: #c67c4e;
+      color: white;
+      padding: 6px 16px;
+      font-size: 13px;
+    }
+
+    /* MEGA HIT SELLERS */
+    .hit-sellers {
+      padding: 40px 20px;
+      background: white;
+      text-align: center;
+    }
+    .hit-sellers h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+    .hit-row {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+    }
+    .hit-row img {
+      width: 30%;
+      border-radius: 6px;
+    }
+
+    /* WELCOME SECTION */
+    .welcome {
+      padding: 40px 20px;
+      background: #fdf8f4;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .welcome-text {
+      width: 50%;
+    }
+    .welcome-text h2 {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+    .welcome-text p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.8;
+      margin-bottom: 10px;
+    }
+    .welcome-text a {
+      display: inline-block;
+      margin-top: 10px;
+      background: #c67c4e;
+      color: white;
+      padding: 10px 24px;
+      font-size: 14px;
+    }
+    .welcome img {
+      width: 50%;
+      border-radius: 6px;
+    }
+
+    /* FEATURES STRIP */
+    .features {
+      background: #c67c4e;
+      padding: 20px;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+      color: white;
+    }
+    .feature h4 {
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .feature p {
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    /* PRODUCTS SECTION */
+    .products {
+      padding: 40px 20px;
+      background: white;
+    }
+    .products h2 {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .filter-btns {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .filter-btns button {
+      padding: 8px 20px;
+      margin: 4px;
+      border: 1px solid #ddd;
+      background: white;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .filter-btns button.active {
+      background: #c67c4e;
+      color: white;
+      border-color: #c67c4e;
+    }
+    .product-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .product-card {
+      width: 22%;
+      border: 1px solid #eee;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product-card .info {
+      padding: 12px;
+    }
+    .product-card .info h3 {
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #333;
+    }
+    .product-card .info .price {
+      color: #c67c4e;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .product-card .info button {
+      width: 100%;
+      padding: 8px;
+      background: #f5ede6;
+      border: 1px solid #c67c4e;
+      color: #c67c4e;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .product-card .info button:hover {
+      background: #c67c4e;
+      color: white;
+    }
+
+    /* FOOTER */
+    .footer {
+      background: #2d2d2d;
+      color: #ccc;
+      padding: 40px 20px 20px;
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .footer-col {
+      flex: 1;
+      min-width: 180px;
+    }
+    .footer-col img {
+      height: 50px;
+      margin-bottom: 10px;
+      filter: brightness(0) invert(1);
+    }
+    .footer-col p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #aaa;
+    }
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col ul li {
+      margin-bottom: 8px;
+    }
+    .footer-col ul li a {
+      color: #aaa;
+      font-size: 13px;
+    }
+    .footer-col ul li a:hover {
+      color: #c67c4e;
+    }
+    .footer-col address {
+      font-style: normal;
+      font-size: 13px;
+      color: #aaa;
+      line-height: 1.8;
+    }
+    .footer-bottom {
+      background: #222;
+      text-align: center;
+      padding: 14px;
+      color: #888;
+      font-size: 13px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div>All Categories &nbsp; Bath&Body &nbsp; Hair &nbsp; Skin</div>
+    <div>&#9825; Wishlist &nbsp;&nbsp; &#128722; Cart</div>
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+    <img src="https://sunstraanaturals.com/public/storage/photos/40/new logo/20230802_185303-removebg-preview.png" alt="Logo">
+    <div class="header-icons">
+      <span>&#9825; 0</span>
+      <span>&#128722; 0</span>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About Us</a>
+    <a href="#">Trendy Products</a>
+    <a href="#">Categories</a>
+    <a href="#">Contact Us</a>
+    <a href="#">Login</a>
+  </div>
+
+  <!-- SOCIAL MEDIA SIDEBAR -->
+  <div class="social-bar">
+    <a class="yt" href="#">YT</a>
+    <a class="fb" href="#">FB</a>
+    <a class="ig" href="#">IG</a>
+    <a class="tw" href="#">TW</a>
+    <a class="li" href="#">IN</a>
+  </div>
+
+  <!-- COLOR CHANGER -->
+  <div class="color-bar">
+    <button onclick="document.querySelector('.color-options').classList.toggle('show')">Color</button>
+    <div class="color-options">
+      <div class="color-dot" style="background:#c67c4e" onclick="changeColor('#c67c4e')"></div>
+      <div class="color-dot" style="background:#e07ea0" onclick="changeColor('#e07ea0')"></div>
+      <div class="color-dot" style="background:#5aaa6e" onclick="changeColor('#5aaa6e')"></div>
+      <div class="color-dot" style="background:#5a8de0" onclick="changeColor('#5a8de0')"></div>
+      <div class="color-dot" style="background:#9b59b6" onclick="changeColor('#9b59b6')"></div>
+    </div>
+  </div>
+
+  <!-- SLIDER -->
+  <div class="slider">
+    <div class="slide active">
+      <img src="https://sunstraanaturals.com/public/storage/photos/40/Banner/Coffee banner 3.jpg" alt="Banner 1">
+    </div>
+    <div class="slide">
+      <img src="https://sunstraanaturals.com/public/storage/photos/40/Banner/New banner 2 (1).jpg" alt="Banner 2">
+    </div>
+    <div class="slide">
+      <img src="https://sunstraanaturals.com/public/storage/photos/40/Banner/New Banner 2.1.jpg" alt="Banner 3">
+    </div>
+    <div class="slider-btns">
+      <button onclick="changeSlide(-1)">&#10094;</button>
+      <button onclick="changeSlide(1)">&#10095;</button>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <div class="categories">
+    <h2>Categories</h2>
+    <div class="cat-row">
+      <div class="cat-box">
+        <img src="https://sunstraanaturals.com/public/storage/photos/40/1/Category/young-beautiful-blonde-girl-cares-face-skin-with-moisturizer-front-mirror (1).jpg" alt="Skin">
+        <div class="cat-label">
+          <h3>Skin</h3>
+          <a href="#">Discover Now</a>
+        </div>
+      </div>
+      <div class="cat-box">
+        <img src="https://sunstraanaturals.com/public/storage/photos/40/1/Category/woman-washing-head-hairsalon (1).jpg" alt="Hair">
+        <div class="cat-label">
+          <h3>Hair</h3>
+          <a href="#">Discover Now</a>
+        </div>
+      </div>
+      <div class="cat-box">
+        <img src="https://sunstraanaturals.com/public/storage/photos/40/1/Category/gua-sha-care-products-arrangement (1).jpg" alt="Bath&Body">
+        <div class="cat-label">
+          <h3>Bath&Body</h3>
+          <a href="#">Discover Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEGA HIT SELLERS -->
+  <div class="hit-sellers">
+    <h2>Mega Hit Sellers</h2>
+    <div class="hit-row">
+      <img src="https://sunstraanaturals.com/uploads/Mega-hit-sellers-coffee.jpeg" alt="Coffee">
+      <img src="https://sunstraanaturals.com/uploads/Mega-hit-sellers-banana.jpeg" alt="Banana">
+      <img src="https://sunstraanaturals.com/uploads/Mega-hit-sellers-strawberry.jpeg" alt="Strawberry">
+    </div>
+  </div>
+
+  <!-- WELCOME -->
+  <div class="welcome">
+    <div class="welcome-text">
+      <h2>Welcome To Sunstra Natural</h2>
+      <p>Looking for the Beauty Products In Rajapalayam? We are always the best. We lookout for the prettiest daisies and the freshest greens to make sure your skin stays healthy and happy.</p>
+      <p>Every single product is rich in minerals, vitamins, antioxidants and essential oils that soothe every pore on your face.</p>
+      <a href="#">Contact Us</a>
+    </div>
+    <img src="https://sunstraanaturals.com/uploads/squotes.jpeg" alt="Quote">
+  </div>
+
+  <!-- FEATURES STRIP -->
+  <div class="features">
+    <div class="feature"><h4>FREE DELIVERY</h4><p>Above ₹600</p></div>
+    <div class="feature"><h4>HARMLESS</h4><p>Completely safe</p></div>
+    <div class="feature"><h4>SECURED PAYMENT</h4><p>100% Secure</p></div>
+    <div class="feature"><h4>CRUELTY FREE</h4><p>Ethically kind</p></div>
+    <div class="feature"><h4>ISO CERTIFIED</h4><p>Verified purity</p></div>
+    <div class="feature"><h4>PURE ESSENTIAL OIL</h4><p>Certified purity</p></div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="products">
+    <h2>Products</h2>
+    <div class="filter-btns">
+      <button class="active" onclick="filter('all',this)">All Products</button>
+      <button onclick="filter('skin',this)">Skin</button>
+      <button onclick="filter('hair',this)">Hair</button>
+      <button onclick="filter('bath',this)">Bath&Body</button>
+    </div>
+    <div class="product-row">
+      <div class="product-card" data-cat="hair">
+        <img src="https://sunstraanaturals.com/public/storage/photos/40/productsnew/Rose shampoo.jpg" alt="Rose Shampoo">
+        <div class="info">
+          <h3>Lusturious Indian rose shampoo (200 ml)</h3>
+          <div class="price">₹642.00</div>
+          <button>Add to cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="bath">
+        <img src="https://sunstraanaturals.com/public/storage/photos/40/productsnew/Rose Body wash.jpg" alt="Rose Body Wash">
+        <div class="info">
+          <h3>The royal refreshing rose body wash (250 ml)</h3>
+          <div class="price">₹650.00</div>
+          <button>Add to cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="hair">
+        <img src="https://sunstraanaturals.com/public/storage/photos/40/productsnew/spanish lanvender hair fall shampoo.jpg" alt="Lavender Shampoo">
+        <div class="info">
+          <h3>Spanish Lavender Anti Hair fall shampoo (200ml)</h3>
+          <div class="price">₹583.00</div>
+          <button>Add to cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="skin">
+        <img src="https://sunstraanaturals.com/public/storage/photos/40/productsnew/stawberry.jpg" alt="Strawberry Face Wash">
+        <div class="info">
+          <h3>Strawberry Fresh Face Wash for Oily skin (90ml)</h3>
+          <div class="price">₹192.00</div>
+          <button>Add to cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="skin">
+        <img src="https://sunstraanaturals.com/public/storage/photos/40/productsnew/Cofee.jpg" alt="Coffee Face Wash">
+        <div class="info">
+          <h3>De-Tan Coffee Face Wash for oily skin (90ml)</h3>
+          <div class="price">₹197.00</div>
+          <button>Add to cart</button>
+        </div>
+      </div>
+      <div class="product-card" data-cat="bath">
+        <img src="https://sunstraanaturals.com/public/storage/photos/40/productsnew/banana.jpg" alt="Banana Body Wash">
+        <div class="info">
+          <h3>Sweet Moisture Creamy Body Wash - Banana & Vanilla (250ml)</h3>
+          <div class="price">₹397.00</div>
+          <button>Add to cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-col">
+      <img src="https://sunstraanaturals.com/public/storage/photos/40/new logo/20230802_185303-removebg-preview.png" alt="Logo">
+      <p>We are committed to helping you lead a healthier, happier life through the power of nature.</p>
+      <br>
+      <p>Got Question? Call us 24/7</p>
+      <p style="color:#c67c4e; font-weight:bold;">(+91) 9842956956</p>
+    </div>
+    <div class="footer-col">
+      <h4>Information</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Login</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms & Conditions</a></li>
+        <li><a href="#">Return & Refund Policy</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Get In Touch</h4>
+      <address>
+        132, Pudukotai street,<br>
+        North Samandhapuram,<br>
+        Rajapalayam 626-117,<br>
+        Virudhunagar district,<br>
+        TamilNadu, India.
+      </address>
+    </div>
+    <div class="footer-col">
+      <h4>Social Media</h4>
+      <a href="#" style="color:#aaa; display:block; margin-bottom:8px; font-size:13px;">YouTube</a>
+      <a href="#" style="color:#aaa; display:block; margin-bottom:8px; font-size:13px;">Facebook</a>
+      <a href="#" style="color:#aaa; display:block; margin-bottom:8px; font-size:13px;">Instagram</a>
+      <a href="#" style="color:#aaa; display:block; margin-bottom:8px; font-size:13px;">Twitter</a>
+      <a href="#" style="color:#aaa; display:block; margin-bottom:8px; font-size:13px;">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    Copyright &copy; 2026 Anjana Infotech - All Rights Reserved.
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+
+    // SLIDER
+    let current = 0;
+    function changeSlide(dir) {
+      let slides = document.querySelectorAll('.slide');
+      slides[current].classList.remove('active');
+      current = (current + dir + slides.length) % slides.length;
+      slides[current].classList.add('active');
+    }
+    setInterval(() => changeSlide(1), 4000);
+
+    // PRODUCT FILTER
+    function filter(cat, btn) {
+      document.querySelectorAll('.filter-btns button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.product-card').forEach(card => {
+        card.style.display = (cat === 'all' || card.dataset.cat === cat) ? 'block' : 'none';
+      });
+    }
+
+    // COLOR CHANGER
+    function changeColor(color) {
+      document.querySelector('.navbar').style.background = color;
+      document.querySelector('.features').style.background = color;
+      document.querySelector('.color-bar button').style.background = color;
+      document.querySelectorAll('.social-bar a.yt').forEach(a => {});
+      document.querySelectorAll('.filter-btns button.active').forEach(b => b.style.background = color);
+    }
+
+  </script>
+</body>
+</html>

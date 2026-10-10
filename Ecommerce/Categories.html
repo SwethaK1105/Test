@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Categories</title>
+
+<link rel="stylesheet" href="ecom.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="div1">
+
+    <h2 class="h2">Ecommerce</h2>
+    <br>
+
+    <div class="q">
+        <a href="dashboard.html" class="a">Dashboard</a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="Products.html" class="a">Products</a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="Categories.html" class="a">Categories</a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="Users.html" class="a">Users</a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="#" class="a" onclick="logout()">Logout</a>
+    </div>
+
+</div>
+
+<div style="flex:1;padding:20px;">
+
+    <button class="s1" onclick="openCategory()">
+    + Add Category
+</button>
+
+
+    <h1>Categories</h1>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Category Name</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="categoryBody">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+
+let categories =
+JSON.parse(localStorage.getItem("categories")) || [];
+
+let body =
+document.getElementById("categoryBody");
+
+displayCategories();
+
+function displayCategories(){
+
+    body.innerHTML = "";
+
+    if(categories.length === 0){
+
+        body.innerHTML = `
+        <tr>
+            <td colspan="2">
+                No Categories Available
+            </td>
+        </tr>
+        `;
+
+        return;
+    }
+
+    categories.forEach((category,index)=>{
+
+        body.innerHTML += `
+
+        <tr>
+
+            <td>${category.name}</td>
+
+            <td>
+
+                <button onclick="editCategory(${index})">
+                    <i class="fa-solid fa-pencil"></i>
+                </button>
+
+                <button onclick="deleteCategory(${index})">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+    });
+}
+
+function editCategory(index){
+
+    localStorage.setItem(
+        "categoryEditIndex",
+        index
+    );
+
+    location.href =
+    "addcategory.html";
+}
+
+function deleteCategory(index){
+
+    if(confirm("Delete Category?")){
+
+        categories.splice(index,1);
+
+        localStorage.setItem(
+            "categories",
+            JSON.stringify(categories)
+        );
+
+        displayCategories();
+    }
+}
+
+function logout(){
+
+    localStorage.removeItem("editIndex");
+    localStorage.removeItem("userEditIndex");
+    localStorage.removeItem("categoryEditIndex");
+
+    location.href="login.html";
+}
+
+</script>
+
+</body>
+</html>

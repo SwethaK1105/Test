@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Set+Get</title></head>
+<body>
+        <form style="text-align: center;">
+            <label>Name:</label>
+            <input type="text" id="s1"><br><br>
+            <label>Age:</label>
+            <input type="number" id="s2"><br><br>
+            <label>City:</label>
+            <input type="text" id="s3"><br><br>
+            <label>Password:</label>
+            <input type="text" id="s4"><br><br> 
+            <label>Email:</label>
+            <input type="text" id="s5"><br><br> 
+            <label>Contact:</label>
+            <input type="number" id="s6"><br><br>
+            <button type="Submit" onclick="clickfunc()">Submit</button>
+</form>
+<script>
+    var user=JSON.parse(localStorage.getItem("Data"))||[];
+        function clickfunc()
+        {
+        var name=document.getElementById("s1").value;
+        var age=document.getElementById("s2").value;
+        var password=document.getElementById("s4").value;
+        var city=document.getElementById("s3").value;
+        var email=document.getElementById("s5").value;
+        var contact=document.getElementById("s6").value;
+            var userob={
+                Name:name,
+                Age:age,
+                Password:password,
+                City:city,
+                Email:email,
+                Contact:contact
+            };
+            user.push(userob)
+
+        localStorage.setItem("Data",JSON.stringify(user))
+        var a=JSON.parse(localStorage.getItem("Data"))
+        console.log(a)
+
+
+        var tab=document.createElement("table")
+        tab.border=2
+        tab.style.borderCollapse="collapse"
+        document.body.appendChild(tab)
+        var th=document.createElement("th")
+        var th2=document.createElement("th")
+        var th3=document.createElement("th")
+        var th4=document.createElement("th")
+        var th5=document.createElement("th")
+        var th6=document.createElement("th")
+        var tr=document.createElement("tr")
+        var tr2=document.createElement("tr")
+        var tr3=document.createElement("tr")
+        var tr4=document.createElement("tr")
+        var tr5=document.createElement("tr")
+        var tr6=document.createElement("tr")
+        var td=document.createElement("td")
+        var td2=document.createElement("td")
+        var td3=document.createElement("td")
+        var td4=document.createElement("td")
+        var td5=document.createElement("td")
+        var td6=document.createElement("td")
+        th.innerHTML="Name";
+        th2.innerHTML="Age";
+        th3.innerHTML="City";
+        th4.innerHTML="Password";
+        th5.innerHTML="Email";
+        th6.innerHTML="Contact";
+        tr.append(th);
+        tr.append(th2);
+        tr.append(th3);
+        tr.append(th4);
+        tr.append(th5);
+        tr.append(th6);
+        tab.append(tr);
+        td.document.getElementById(s1).innerHTML=name;
+        td2.document.getElementById(s2).innerHTML=age;
+        td3.document.getElementById(s3).innerHTML=city;
+        td4.document.getElementById(s4).innerHTML=password;
+        td5.document.getElementById(s5).innerHTML=email;
+        td6.document.getElementById(s6).innerHTML=password;
+        tr2.append(td)
+        tab.append(tr2)
+        };
+
+
+</script>
+
+</body>
+
+    </html>

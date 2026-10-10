@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Array Methods</title>
+</head>
+<body>
+
+    <p id="b"></p>
+
+    <button onclick="pushdata()">Push</button>
+    <button onclick="popdata()">Pop</button>
+    <button onclick="shiftdata()">Shift</button>
+    <button onclick="unshiftdata()">UnShift</button>
+    <button onclick="filterdata()">Filter</button>
+    <button onclick="mapdata()">Map</button>
+    <button onclick="find()">Find</button>
+
+    <script>
+
+        let s = ["Vijay"];
+
+        
+        document.getElementById("b").innerHTML = s;
+
+        function pushdata() {
+            s.push("Suriya", "Madhavan", "Vikram", "Ajith");
+            document.getElementById("b").innerHTML = s;
+        }
+
+        function popdata() {
+            s.pop();
+            document.getElementById("b").innerHTML = s;
+        }
+
+        function shiftdata() {
+            s.shift();
+            document.getElementById("b").innerHTML = s;
+        }
+
+        function unshiftdata() {
+            s.unshift("Dhuruv");
+            document.getElementById("b").innerHTML = s;
+        }
+
+        function filterdata() {
+            let result = s.filter(obj => obj.startsWith("D"));
+            document.getElementById("b").innerHTML = result;
+        }
+
+        function mapdata() {
+            let result = s.map(obj => obj.toUpperCase());
+            document.getElementById("b").innerHTML = result;
+        }
+        function find() {
+            let result = s.find(obj => obj=="Vikram");
+            document.getElementById("b").innerHTML = result;
+        }
+        localStorage.setItem("Name","Swetha");
+        localStorage.setItem("Age","20")
+        localStorage.setItem("Gender","Female")
+        var data=localStorage.getItem("Name");
+        console.log(data);
+        localStorage.removeItem("Age")
+
+        // arr=[
+        //     {
+        //         Name:"Swetha",
+        //         Age:20,
+        //         City:"Rajapalayam"
+        //     },
+        //     {
+        //         Name:"Brindha",
+        //         Age:25,
+        //         City:"Sethur"
+        //     },
+        //     {
+        //         Name:"Venkatesh",
+        //         Age:29,
+        //         City:"Chennai"
+        //     }
+        // ];
+        // localStorage.setItem("Data",JSON.stringify(arr))
+        // var gdata=JSON.parse(localStorage.getItem("Data"));
+        // console.table(gdata)
+
+        var user=JSON.parse(localStorage.getItem("Data"))||[];
+        function clickfunc()
+        {
+        var name=document.getElementById("s1").value;
+        var age=document.getElementById("s2").value;
+        var password=document.getElementById("s4").value;
+        var city=document.getElementById("s3").value;
+        var email=document.getElementById("s5").value;
+        var contact=document.getElementById("s6").value;
+            var userob={
+                Name:name,
+                Age:age,
+                Password:password,
+                City:city,
+                Email:email,
+                Contact:contact
+            };
+            user.push(userob)
+
+        localStorage.setItem("Data",JSON.stringify(user))
+        var a=JSON.parse(localStorage.getItem("Data"))
+        console.log(a)
+        };
+
+
+    </script>
+
+    <form style="text-align: center;">
+            <label>Name:</label>
+            <input type="text" id="s1"><br><br>
+            <label>Age:</label>
+            <input type="number" id="s2"><br><br>
+            <label>City:</label>
+            <input type="text" id="s3"><br><br>
+            <label>Password:</label>
+            <input type="text" id="s4"><br><br> 
+            <label>Email:</label>
+            <input type="text" id="s5"><br><br> 
+            <label>Contact:</label>
+            <input type="number" id="s6"><br><br>
+            <button type="Submit" onclick="clickfunc()">Submit</button>
+
+</body>
+</html>

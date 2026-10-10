@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+
+<style>
+
+body{
+    background:aquamarine;
+    margin:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    font-family:Arial;
+}
+
+.login-box{
+    background:white;
+    width:500px;
+    padding:30px;
+    border-radius:10px;
+    text-align:center;
+}
+
+h1{
+    text-decoration:underline;
+}
+
+label{
+    font-size:25px;
+}
+
+input{
+    font-size:20px;
+    padding:5px;
+}
+
+button{
+    padding:10px 20px;
+    font-size:20px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h1>Login Form</h1>
+
+    <label>Username:</label>
+    <input type="text" id="s"><br><br>
+
+    <label>Password:</label>
+    <input type="password" id="k"><br><br>
+
+    <button onclick="auth()">Login</button>
+
+</div>
+
+<script>
+
+function auth(){
+
+    let username = document.getElementById("s").value;
+
+    let password = document.getElementById("k").value;
+
+    if(username === "admin" && password === "12345"){
+
+        alert("Login Successful");
+
+        window.location.href = "dashboard.html";
+    }
+
+    else{
+
+        alert("Incorrect Username or Password");
+    }
+}
+function login(){
+
+    let username =
+    document.getElementById("username").value.trim();
+
+    let password =
+    document.getElementById("password").value.trim();
+
+    let users =
+    JSON.parse(localStorage.getItem("signupUsers")) || [];
+
+    let user = users.find(u =>
+        u.username === username &&
+        u.password === password
+    );
+
+    if(user){
+
+        alert("Login Successful");
+
+        window.location.href =
+        "dashboard.html";
+    }
+    else{
+
+        alert("Invalid Username or Password");
+    }
+}
+
+</script>
+
+</body>
+</html>

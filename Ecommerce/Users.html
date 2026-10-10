@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+
+    <link rel="stylesheet" href="ecom.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="div1">
+
+    <h2 class="h2">Ecommerce</h2>
+    <br>
+
+    <div class="q">
+        <a href="dashboard.html" class="a">
+            <i class="fa-solid fa-house"></i>
+            Dashboard
+        </a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="Products.html" class="a">
+            Products
+        </a>
+    </div>
+
+    <br>
+
+    <div class="q">
+    <a href="Categories.html" class="a">
+        Categories
+    </a>
+</div>
+
+<br>
+
+    <div class="q">
+        <a href="Users.html" class="a">
+            Users
+        </a>
+    </div>
+
+    <br>
+
+    <div class="q">
+        <a href="#" class="a" onclick="logout()">Logout</a>
+    </div>
+
+</div>
+
+<div style="flex:1;padding:20px;">
+
+    <button
+        class="s1"
+        onclick="location.href='adduser.html'">
+
+        + Add User
+
+    </button>
+
+    <h1>User Management</h1>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Mobile</th>
+
+                <th>Action</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="userBody">
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+
+let users =
+JSON.parse(localStorage.getItem("users")) || [];
+
+let body =
+document.getElementById("userBody");
+
+displayUsers();
+
+function displayUsers(){
+
+    body.innerHTML = "";
+
+    if(users.length === 0){
+
+        body.innerHTML = `
+        <tr>
+            <td colspan="4">
+                No Users Available
+            </td>
+        </tr>
+        `;
+
+        return;
+    }
+
+    users.forEach((user,index)=>{
+
+        body.innerHTML += `
+
+        <tr>
+
+            <td>${user.name}</td>
+
+            <td>${user.email}</td>
+
+            <td>${user.mobile}</td>
+
+            <td>
+
+                <button
+                onclick="editUser(${index})">
+
+                    <i class="fa-solid fa-pencil"></i>
+
+                </button>
+
+                <button
+                onclick="deleteUser(${index})">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </td>
+
+        </tr>
+
+        `;
+    });
+}
+
+function editUser(index){
+
+    localStorage.setItem(
+        "userEditIndex",
+        index
+    );
+
+    location.href =
+    "adduser.html";
+}
+
+function deleteUser(index){
+
+    let result =
+    confirm("Delete this user?");
+
+    if(result){
+
+        users.splice(index,1);
+
+        localStorage.setItem(
+            "users",
+            JSON.stringify(users)
+        );
+
+        displayUsers();
+    }
+}
+
+</script>
+
+</body>
+</html>

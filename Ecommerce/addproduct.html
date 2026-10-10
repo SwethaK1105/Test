@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+
+    <link rel="stylesheet" href="ecom.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+
+    <div class="div1">
+
+        <h2 class="h2">Ecommerce</h2>
+
+        <br>
+
+        <div class="q">
+            <a href="dashboard.html" class="a">
+                <i class="fa-solid fa-house"></i>
+                Dashboard
+            </a>
+        </div>
+
+        <br>
+
+        <div class="q">
+            <a href="Products.html" class="a">
+                Products
+            </a>
+        </div>
+
+        <br>
+
+        <div class="q">
+    <a href="Categories.html" class="a">
+        Categories
+    </a>
+</div>
+
+<br>
+
+        <div class="q">
+            <a href="Users.html" class="a">
+                Users
+            </a>
+        </div>
+
+        <br>
+
+        <div class="q">
+            <a href="#" class="a" onclick="logout()">Logout</a>
+        </div>
+
+    </div>
+
+    <!-- Form Area -->
+
+    <div style="flex:1;">
+
+        <form class="f1">
+
+            <h1 id="formTitle">Add Product</h1>
+
+            <br>
+
+            <label>Product Name:</label>
+
+            <input
+            type="text"
+            id="s1">
+
+            <br><br>
+
+            <label>Category:</label>
+
+            <select id="s4">
+
+                <option value="Grocery">
+                    Grocery
+                </option>
+
+                <option value="Dairy">
+                    Dairy
+                </option>
+
+                <option value="Vegetables">
+                    Vegetables
+                </option>
+
+                <option value="Fruits">
+                    Fruits
+                </option>
+
+                <option value="Bakery">
+                    Bakery
+                </option>
+
+            </select>
+
+            <br><br>
+
+            <label>Price:</label>
+
+            <input
+            type="number"
+            id="s2">
+
+            <br><br>
+
+            <label>Stock Quantity:</label>
+
+            <input
+            type="number"
+            id="s3">
+
+            <br><br>
+
+            <button
+            type="button"
+            onclick="saveProduct()">
+
+                Save Product
+
+            </button>
+
+        </form>
+
+    </div>
+
+<script>
+
+let products =
+JSON.parse(localStorage.getItem("products")) || [];
+
+let editIndex =
+localStorage.getItem("editIndex");
+
+/* Edit Mode */
+
+if(editIndex !== null){
+
+    document.getElementById(
+        "formTitle"
+    ).innerText = "Edit Product";
+
+    document.getElementById("s1").value =
+    products[editIndex].ProductName;
+
+    document.getElementById("s4").value =
+    products[editIndex].Category;
+
+    document.getElementById("s2").value =
+    products[editIndex].Price;
+
+    document.getElementById("s3").value =
+    products[editIndex].Stock;
+}
+
+/* Save Product */
+
+function saveProduct(){
+
+    let productName =
+    document.getElementById("s1").value.trim();
+
+    let category =
+    document.getElementById("s4").value;
+
+    let price =
+    document.getElementById("s2").value;
+
+    let stock =
+    document.getElementById("s3").value;
+
+    if(
+        productName === "" ||
+        price === "" ||
+        stock === ""
+    ){
+
+        alert(
+            "Please fill all fields"
+        );
+
+        return;
+    }
+
+    let product = {
+
+        ProductName: productName,
+
+        Category: category,
+
+        Price: price,
+
+        Stock: stock
+    };
+
+    if(editIndex !== null){
+
+        products[editIndex] =
+        product;
+
+        localStorage.removeItem(
+            "editIndex"
+        );
+
+        alert(
+            "Product Updated Successfully"
+        );
+    }
+
+    else{
+
+        products.push(product);
+
+        alert(
+            "Product Added Successfully"
+        );
+    }
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+
+    window.location.href =
+    "Products.html";
+}
+
+</script>
+
+</body>
+</html>
